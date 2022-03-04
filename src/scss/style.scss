@@ -1,0 +1,270 @@
+@use "sass:math";
+
+// Подключение миксинов ===========================================================================================================================================================================================================================================================================
+@import url('https://fonts.googleapis.com/css?family=Lato:400,700');
+
+$fontSize: 14px; // где 14(px) - размер шрифта по умолчанию из макета
+
+// Основные цвета
+$mainColor: #fff; // Цвет шрифта по умолчанию
+$blueColor: #2A3354;
+$blueColorW: #0771ED;
+$redColorW: #C93636;
+
+// Обнуление и общие параметры ============================================================================================================================================================================================== =============================================================================================== ===============================================================================================
+@import "null";
+
+body {
+	font-family: "Lato";
+	// Скролл заблокирован
+	.lock & {
+		overflow: hidden;
+		touch-action: none;
+	}
+	// Сайт загружен
+	.loaded & {
+	}
+}
+// Оболочка ============================================================================================================================================================================================================================================================================================================================================================================================================================================
+.wrapper {
+	min-height: 100%;
+	display: flex;
+	flex-direction: column;
+	overflow: hidden;
+	// Прижимаем footer
+	> main {
+		flex: 1 1 auto;
+	}
+	// Фикс для слайдеров
+	> * {
+		min-width: 0;
+	}
+}
+
+
+.page {
+
+	// .page__aside
+
+	&__aside {
+	}
+}
+.aside-page {
+	position: fixed;
+	left: 0;
+	top: 0;
+	height: 100vh;
+	z-index: 10;
+	background-color: $blueColor;
+	width: 250px;
+	display: flex;
+	flex-direction: column;
+	overflow-y: auto;
+	padding: 20px 15px;
+	// .aside-page__top
+
+	&__top {
+		display: flex;
+		align-items: center;
+		justify-content: space-between;
+		margin: 0 0 48px 0;
+	}
+
+	// .aside-page__logo
+
+	&__logo {
+		display: inline-block;
+		flex: 0 0 78px;
+		margin-right: 15px;
+		img, svg{
+			width: 100%;
+			object-fit: contain;
+		}
+	}
+
+	// .aside-page__action
+
+	&__action {
+		width: 16px;
+		height: 16px;
+		flex: 0 0 16px;
+		background: url("../img/zoom.svg")  center no-repeat;
+		background-size: cover;
+	}
+
+	// .aside-page__chose
+
+	&__chose {
+	}
+
+	// .aside-page__nav
+
+	&__nav {
+	}
+
+	// .aside-page__out
+
+	&__out {
+		
+		background-image: url("../img/out.svg");
+		background-position: left ;
+		background-repeat: no-repeat;
+		background-size: 16px;
+		width: 100px;
+		opacity: 0.6;
+		&:hover{
+			color: $blueColorW;
+		}
+	}
+}
+.chose {
+	margin: 0 0 25px 0;
+	// .chose__name
+
+	&__name {
+		color: #909ABB;
+		font-size: 10px;
+		line-height: 12px;
+		margin: 0 0 8px 0;
+		padding-left: 12px;
+	}
+
+	// .chose__select
+
+	&__select {
+		
+		border: 1px solid #404867;
+		border-radius: 4px;
+
+		background-image: url("../img/arrow.svg");
+		background-size: 8px;
+		background-repeat: no-repeat;
+		background-position: 96% center;
+
+		select{
+			width: 100%;
+			padding: 10px 12px;
+			background: transparent;
+			color: $mainColor;
+			font-weight: 700;
+			background: transparent;
+			cursor: pointer;
+  			-webkit-appearance: none;
+			  &:focus{
+				  outline: transparent;
+			  }
+		}
+		option{
+			
+			background-color: $blueColor;
+			line-height: 25px;
+		}
+	}
+}
+.aside-nav {
+	flex: 1 1 auto;
+	margin: 0 0 20px 0;
+	// .aside-nav__list
+
+	&__list {
+	}
+
+	// .aside-nav__li
+
+	&__li {
+		padding: 8px 0;
+
+	}
+
+	// .aside-nav__link
+
+	&__link {
+		display: flex;
+		line-height: 17px;
+		padding: 8px 30px 8px 30px;
+		background-image: url("../img/icon-item.svg");
+		background-position: 5px ;
+		background-repeat: no-repeat;
+		background-size: 16px;
+		transition: all 0.2s ;
+		border-radius: 4px;
+		&_parent{
+			position: relative;
+			&::after{
+				content: '';
+				position: absolute;
+
+				top: 50%;
+				transform: translate(0, -50%);
+				right: 10px;
+				background-image: url("../img/arrow.svg");
+				background-position: center;
+				background-repeat: no-repeat;
+				background-size: 8px;
+				width: 6px;
+				height: 5px;
+			}
+			&._spoller-active{
+				background-color: #202845;
+				&::after{
+					transform: rotate(180deg) translate(0, 3px);
+					
+				}
+			}
+			&:hover{
+				background-color: #6A77A3;
+			}
+		}
+		
+		// .aside-nav__link_fq
+
+		&_fq {
+			background-image: url("../img/icon-faq.svg");
+		}
+		
+	
+		&:hover{
+			background-color: $blueColorW;
+		}
+	}
+
+	&__link-subname{
+		font-size: 10px;
+		opacity: 0.5;
+	}
+	&__count{
+		background-color: $redColorW;
+		font-size: 10px;
+		padding: 2px 4px;
+		border-radius: 2px;
+		margin-left: 8px;
+		height: 20px;
+		
+
+	}
+	&__sublist{
+		background-color: #303A5F;
+		border-radius: 4px;
+		padding: 10px 0;
+		margin-top: 8px;
+		li{
+			
+		}
+	}
+	&__sublist_sub{
+		background: #46527D;
+		border-radius: 4px;
+
+		.aside-nav__sublink{
+			&:hover{
+				background-color: #6A77A3;
+			}
+		}
+	}
+	&__sublink{
+		display: block;
+		padding:8px 20px;
+		position: relative;
+		border-radius: 4px;
+	}
+}
